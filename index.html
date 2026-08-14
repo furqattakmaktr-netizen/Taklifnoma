@@ -3,554 +3,736 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taklifnoma | Furqat tumani AKM Amaliy Seminari</title>
-    <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Furqat tumani axborot-kutubxona markazi - amaliy-semenar</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&family=Cinzel:wght@400;500;600;700&family=Pinyon+Script&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0d1b2a;
-            --card-bg: #1b263b;
-            --accent-gold: #e0a96d;
-            --text-light: #f4f4f9;
-            --text-sub: #a3b18a;
+            --bg-dark: #07162c;
+            --bg-gradient: linear-gradient(180deg, #07162c 0%, #0d233a 50%, #051020 100%);
+            --gold: #d4af37;
+            --gold-light: #f3e5ab;
+            --text-light: #ffffff;
+            --text-muted: #a4b3c6;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--bg-color);
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-dark);
             color: var(--text-light);
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px 10px;
         }
 
-        .container {
+        /* Mobil qurilma ramkasi */
+        .phone-wrapper {
             width: 100%;
-            max-width: 480px;
-            background: linear-gradient(180deg, #1b263b 0%, #0d1b2a 100%);
-            border: 1px solid rgba(224, 169, 109, 0.3);
-            border-radius: 24px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            overflow: hidden;
-            text-align: center;
+            max-width: 430px; 
+            height: 100vh;
+            max-height: 920px;
+            background: var(--bg-gradient);
             position: relative;
+            overflow-y: auto;
+            scrollbar-width: none; 
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+            border-radius: 0;
+            scroll-behavior: smooth;
+        }
+        
+        @media (min-width: 440px) {
+            .phone-wrapper {
+                border-radius: 30px;
+                height: 880px;
+                border: 4px solid #1a2a40;
+            }
         }
 
-        .header-decor {
-            padding: 40px 20px 20px;
-            background: radial-gradient(circle, rgba(224,169,109,0.15) 0%, rgba(27,38,59,0) 70%);
+        .phone-wrapper::-webkit-scrollbar {
+            display: none; 
         }
 
-        .ornament {
-            color: var(--accent-gold);
-            font-size: 18px;
+        /* Ekranlar boshqaruvi */
+        .screen {
+            min-height: 100%;
+            width: 100%;
+            position: relative;
+            padding: 50px 25px 80px 25px; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        /* Kirish ekrani */
+        #welcome-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            background: var(--bg-gradient);
+            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        #welcome-screen.hidden {
+            transform: translateY(-100%);
+        }
+
+        /* Naqshli burchaklar */
+        .corner-ornament {
+            position: absolute;
+            width: 140px; 
+            height: 140px;
+            opacity: 0.45; 
+            pointer-events: none;
+            background-image: url('pattern.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        
+        .top-left { top: 0; left: 0; background-position: top left; }
+        .top-right { top: 0; right: 0; background-position: top right; transform: rotate(90deg); }
+        .bottom-left { bottom: 0; left: 0; background-position: bottom left; transform: rotate(-90deg); }
+        .bottom-right { bottom: 0; right: 0; background-position: bottom right; transform: rotate(180deg); }
+
+        .gold-sparkle {
+            font-size: 14px;
+            color: var(--gold);
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .subtitle-premium {
+            font-family: 'Cinzel', serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-transform: uppercase;
             letter-spacing: 4px;
+            color: var(--gold-light);
+            margin-bottom: 15px;
+        }
+
+        .guest-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            color: var(--gold);
+            margin-bottom: 40px;
+            text-shadow: 0 2px 10px rgba(214, 175, 55, 0.3);
+        }
+
+        .btn-open {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--text-light);
+            padding: 14px 35px;
+            font-size: 0.85rem;
+            border-radius: 30px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            box-shadow: 0 0 15px rgba(214, 175, 55, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .btn-open:hover {
+            background: var(--gold);
+            color: var(--bg-dark);
+            box-shadow: 0 0 25px rgba(214, 175, 55, 0.4);
+        }
+
+        /* Asosiy kontent ekranlari */
+        .main-content {
+            display: block;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        .main-content.visible {
+            opacity: 1;
+        }
+
+        /* 2-Ekran uslublari */
+        .welcome-title-top {
+            font-family: 'Pinyon Script', cursive;
+            font-size: 2.8rem;
+            color: var(--gold);
             margin-bottom: 10px;
         }
 
-        .welcome-title {
-            font-family: 'Marcellus', serif;
-            font-size: 28px;
-            color: var(--accent-gold);
+        .akm-illustration {
+            width: 250px; 
+            max-height: 380px;
+            object-fit: cover;
+            margin: 10px 0 10px 0;
+            border-radius: 15px;
+            border: 1px solid rgba(214, 175, 55, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(214, 175, 55, 0.15);
+        }
+
+        .section-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 6px;
+            color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 1px;
             margin-bottom: 5px;
         }
 
-        .subtitle {
-            font-size: 14px;
-            color: var(--text-sub);
-            letter-spacing: 2px;
+        .names-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4.2rem;
+            color: var(--gold);
+            line-height: 1.1;
+            margin: 10px 0;
+        }
+
+        .and-divider {
+            font-size: 1.3rem;
+            font-family: 'Pinyon Script', cursive;
+            color: var(--text-light);
+            margin: -5px 0;
+        }
+
+        .invitation-sub-text {
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            font-weight: 400;
+            line-height: 2;
+            letter-spacing: 3px;
+            color: var(--text-muted);
             text-transform: uppercase;
+            margin: 20px 15px 15px 15px;
         }
 
-        .badge {
-            display: inline-block;
-            background: rgba(224, 169, 109, 0.1);
-            border: 1px solid var(--accent-gold);
-            color: var(--accent-gold);
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 13px;
-            margin: 20px 0;
+        /* Yoqubovlar oilasi bloki */
+        .family-container {
+            position: relative;
+            cursor: pointer;
+            padding: 5px 20px;
         }
 
-        .content-card {
-            padding: 20px 25px 30px;
-        }
-
-        .main-text {
-            font-size: 15px;
-            line-height: 1.7;
-            color: #d1d5db;
-            margin-bottom: 25px;
-        }
-
-        .info-box {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .info-title {
-            color: var(--accent-gold);
-            font-size: 14px;
+        .family-tag {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-        }
-
-        .info-date {
-            font-size: 22px;
+            letter-spacing: 5px;
+            color: var(--gold);
             font-weight: 700;
-            margin-bottom: 4px;
         }
 
-        .info-time {
-            font-size: 14px;
-            color: #9ca3af;
+        .family-container:hover .family-arrow {
+            opacity: 1;
+            transform: translate(-50%, 0);
         }
 
-        /* Countdown Timer */
-        .timer-title {
-            font-size: 13px;
-            color: var(--text-sub);
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .family-arrow {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translate(-50%, -10px);
+            color: var(--gold);
+            font-size: 1.2rem;
+            opacity: 0;
+            transition: all 0.3s ease;
+            animation: bounce 1.5s infinite;
         }
 
-        .timer-grid {
+        /* Pastga skroll ko'rsatkichlari */
+        .scroll-down-indicator {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 30px;
-        }
-
-        .timer-item {
-            background: rgba(224, 169, 109, 0.1);
-            border: 1px solid rgba(224, 169, 109, 0.2);
-            padding: 10px;
-            border-radius: 12px;
-            width: 70px;
-        }
-
-        .timer-number {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--accent-gold);
-        }
-
-        .timer-label {
-            font-size: 10px;
-            color: #9ca3af;
-            text-transform: uppercase;
-        }
-
-        .location-section {
-            background: rgba(0, 0, 0, 0.2);
-            padding: 25px 20px;
-            border-top: 1px solid rgba(224, 169, 109, 0.2);
-        }
-
-        .btn-map {
-            display: inline-block;
-            width: 100%;
-            background: linear-gradient(135deg, #e0a96d 0%, #c88a4b 100%);
-            color: #0d1b2a;
-            padding: 14px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 15px;
-            margin-top: 15px;
-            box-shadow: 0 4px 15px rgba(224, 169, 109, 0.3);
-            transition: transform 0.2s;
-        }
-
-        .btn-map:active {
-            transform: scale(0.98);
-        }
-
-        .contacts {
-            margin-top: 20px;
-            font-size: 13px;
-            color: #9ca3af;
-        }
-
-        .contacts a {
-            color: var(--accent-gold);
-            text-decoration: none;
-            font-weight: 600;
-        }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <div class="header-decor">
-        <div class="ornament">✦ ✦ ✦</div>
-        <div class="subtitle">Furqat Tumani AKM</div>
-        <h1 class="welcome-title">Amaliy Seminar</h1>
-        <div class="badge">Taklifnoma</div>
-    </div>
-
-    <div class="content-card">
-        <p class="main-text">
-            <b>Hurmatli hamkasblar!</b><br>
-            Sizlarni Farg‘ona viloyati tuman va shahar axborot-kutubxona markazlari rahbarlari hamda mutaxassislari ishtirokida o‘tkaziladigan amaliy seminarga samimiy taklif etamiz.
-        </p>
-
-        <div class="info-box">
-            <div class="info-title">Tadbirlar Sanasi va Vaqti</div>
-            <div class="info-date">14-Avgust, 2026</div>
-            <div class="info-time">Soat 08:00 da (Ro‘yxatdan o‘tish: 07:30)</div>
-        </div>
-
-        <div class="timer-title">Tadbir va seminargacha qoldi:</div>
-        <div class="timer-grid">
-            <div class="timer-item">
-                <div class="timer-number" id="days">00</div>
-                <div class="timer-label">Kun</div>
-            </div>
-            <div class="timer-item">
-                <div class="timer-number" id="hours">00</div>
-                <div class="timer-label">Soat</div>
-            </div>
-            <div class="timer-item">
-                <div class="timer-number" id="minutes">00</div>
-                <div class="timer-label">Min</div>
-            </div>
-            <div class="timer-item">
-                <div class="timer-number" id="seconds">00</div>
-                <div class="timer-label">Sek</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="location-section">
-        <div class="info-title">Tadbir O‘tkazilish Joyi</div>
-        <p style="font-size: 14px; color: #e5e7eb; margin-top: 5px;">
-            Farg‘ona viloyati, Furqat tumani,<br>Axborot-kutubxona markazi binosi.
-        </p>
-
-        <!-- Google Maps yoki Yandex xarita havolasini qo'yishingiz mumkin -->
-        <a href="https://maps.google.com" target="_blank" class="btn-map">📍 Xaritadan Ko‘rish</a>
-
-        <div class="contacts">
-            Murojaat va ma'lumot uchun:<br>
-            <a href="tel:+998941357300">+998 (94) 135-73-00</a>
-        </div>
-    </div>
-</div>
-
-<script>
-    // 2026-yil 14-avgust soat 08:00 uchun taymer
-    const eventDate = new Date("Aug 14, 2026 08:00:00").getTime();
-
-    const timer = setInterval(function() {
-        const now = new Date().getTime();
-        const distance = eventDate - now;
-
-        if (distance < 0) {
-            clearInterval(timer);
-            document.querySelector(".timer-grid").innerHTML = "<div style='color:#e0a96d; font-weight:bold;'>Tadbir boshlandi!</div>";
-            return;
-        }
-
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60))Furqat tumani axborot-kutubxona markazi amaliy seminari uchun online taklifnoma sayti kodi va matniy tuzilishi tayyorlandi.
-
-Taqdim etilgan `https://yoqubov.vercel.app/` namunasidagi kabi **interaktiv va taymerli taklifnoma** yaratildi. Ushbu kodni bitta `index.html` fayli sifatida saqlab, Vercel, Netlify yoki GitHub Pages orqali bir necha daqiqada bepul internetga joylashtirishingiz mumkin.
-
----
-
-### Online Taklifnoma Web-Sayt Kodi (`index.html`)
-
-```html
-<!DOCTYPE html>
-<html lang="uz">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amaliy Seminar — Taklifnoma | Furqat tumani AKM</title>
-    <link href="[https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap](https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap)" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            color: #f8fafc;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            padding: 20px;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 5;
         }
 
-        .card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            max-width: 650px;
+        .scroll-down-indicator span {
+            display: block;
+            width: 10px;
+            height: 10px;
+            border-bottom: 2px solid var(--gold);
+            border-right: 2px solid var(--gold);
+            transform: rotate(45deg);
+            opacity: 0;
+            animation: arrowFade 2s infinite;
+        }
+
+        .scroll-down-indicator span:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        /* Animatsiyalar */
+        @keyframes bounce {
+            0%, 100% { transform: translate(-50%, 0); }
+            50% { transform: translate(-50%, 8px); }
+        }
+
+        @keyframes arrowFade {
+            0% { opacity: 0; transform: rotate(45deg) translate(-5px, -5px); }
+            50% { opacity: 1; }
+            100% { opacity: 0; transform: rotate(45deg) translate(5px, 5px); }
+        }
+
+        /* 3-Ekran uslublari */
+        .premium-invitation-box {
+            padding: 10px 10px;
             width: 100%;
-            padding: 40px 30px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .invitation-desc-premium {
+            font-family: 'Cinzel', serif;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 2;
+            letter-spacing: 1px;
+            margin-bottom: 35px;
+            font-weight: 400;
             text-align: center;
         }
 
-        .badge {
+        .invitation-desc-premium b {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.1rem;
+            color: var(--gold);
+            font-weight: 400;
             display: inline-block;
-            background: linear-gradient(90deg, #3b82f6, #06b6d4);
-            color: #fff;
-            padding: 6px 18px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 1px;
+            margin: 0 4px;
+            vertical-align: middle;
+            text-shadow: 0 2px 8px rgba(214, 175, 55, 0.2);
+        }
+
+        .premium-card-date {
+            background: linear-gradient(135deg, rgba(214, 175, 55, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border: 1px solid rgba(214, 175, 55, 0.3);
+            border-radius: 12px;
+            padding: 30px 20px;
+            width: 100%;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .premium-card-date::before {
+            content: '';
+            position: absolute;
+            top: 5px; left: 5px; right: 5px; bottom: 5px;
+            border: 1px solid rgba(214, 175, 55, 0.1);
+            border-radius: 8px;
+            pointer-events: none;
+        }
+
+        .date-large-premium {
+            font-family: 'Cinzel', serif;
+            font-size: 1.9rem;
+            color: var(--gold);
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin: 10px 0;
+            text-shadow: 0 2px 10px rgba(214, 175, 55, 0.2);
+        }
+
+        .time-premium {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            color: var(--gold-light);
+            font-weight: 500;
             text-transform: uppercase;
+        }
+
+        /* Taymer */
+        .countdown-container-premium {
+            width: 100%;
             margin-bottom: 20px;
         }
 
-        h1 {
+        .countdown-row-premium {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .countdown-cell-premium {
+            flex: 1;
+            background: rgba(7, 22, 44, 0.6);
+            border: 1px solid rgba(214, 175, 55, 0.15);
+            border-radius: 10px;
+            padding: 12px 5px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .countdown-val-premium {
+            font-family: 'Cinzel', serif;
             font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: #ffffff;
-            line-height: 1.3;
-        }
-
-        .subtitle {
-            color: #94a3b8;
-            font-size: 1rem;
-            margin-bottom: 25px;
-            line-height: 1.6;
-        }
-
-        .divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            margin: 25px 0;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 30px;
-            text-align: left;
-        }
-
-        .info-box {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 16px;
-        }
-
-        .info-box span {
-            display: block;
-            font-size: 0.8rem;
-            color: #38bdf8;
             font-weight: 600;
-            text-transform: uppercase;
-            margin-bottom: 4px;
+            color: var(--gold-light);
+            display: block;
+            margin-bottom: 20px;
         }
 
-        .info-box p {
-            font-size: 0.95rem;
-            color: #e2e8f0;
+        .countdown-lbl-premium {
+            font-family: 'Cinzel', serif;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 2px;
             font-weight: 500;
         }
 
-        /* Countdown Timer */
-        .timer-title {
-            font-size: 0.9rem;
-            color: #94a3b8;
-            margin-bottom: 15px;
+        /* Elegant ajratkich */
+        .premium-divider {
+            width: 60px;
+            height: 1px;
+            background: var(--gold);
+            margin: 40px auto;
+            position: relative;
+        }
+        .premium-divider::after {
+            content: 'вњ¦';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0d233a;
+            padding: 0 6px;
+            color: var(--gold);
+            font-size: 10px;
+        }
+
+        /* 4-EKRAN USLUBLARI */
+        .address-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(214, 175, 55, 0.02) 100%);
+            border: 1px solid rgba(214, 175, 55, 0.2);
+            border-radius: 15px;
+            padding: 25px 20px;
+            width: 100%;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 2;
+        }
+
+        .address-destination {
+            font-family: 'Cinzel', serif;
+            font-size: 1.25rem;
+            color: var(--gold);
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
             text-transform: uppercase;
+        }
+
+        .address-p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.8;
+            letter-spacing: 0.5px;
+        }
+
+        .action-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #d4af37 0%, #b3922e 100%);
+            color: #000;
+            text-decoration: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            box-shadow: 0 5px 20px rgba(214, 175, 55, 0.4);
+            transition: all 0.3s ease;
+            margin-bottom: 35px;
+            animation: pulseGlow 2s infinite;
+            z-index: 2;
+        }
+
+        .action-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(214, 175, 55, 0.6);
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 5px 15px rgba(214, 175, 55, 0.4); }
+            50% { box-shadow: 0 5px 25px rgba(214, 175, 55, 0.7); }
+            100% { box-shadow: 0 5px 15px rgba(214, 175, 55, 0.4); }
+        }
+
+        .qr-section {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px dashed rgba(214, 175, 55, 0.25);
+            border-radius: 12px;
+            padding: 20px;
+            width: 100%;
+            margin-bottom: 20px;
+            z-index: 2;
+        }
+
+        .qr-section img {
+            width: 140px;
+            height: 140px;
+            border: 3px solid var(--gold);
+            padding: 6px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        }
+
+        .family-footer {
+            width: 100%;
+            margin-top: 15px;
+            z-index: 2;
+        }
+
+        .phone-footer {
+            margin-top: 8px;
+            font-size: 1.1rem;
+            font-family: 'Cinzel', serif;
             letter-spacing: 1px;
         }
 
-        .countdown {
+        .phone-footer a {
+            color: var(--gold-light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .phone-footer a:hover {
+            color: var(--gold);
+        }
+
+        /* Musiqa pleyer */
+        .music-toggle {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(7, 22, 44, 0.8);
+            border: 1px solid var(--gold);
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .time-block {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            border-radius: 14px;
-            padding: 12px;
-            min-width: 75px;
-        }
-
-        .time-block span {
-            display: block;
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: #38bdf8;
-        }
-
-        .time-block label {
-            font-size: 0.7rem;
-            color: #94a3b8;
-            text-transform: uppercase;
-        }
-
-        /* Action Buttons */
-        .btn-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .btn {
-            display: inline-block;
-            width: 100%;
-            padding: 14px;
-            border-radius: 12px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
+            align-items: center;
             cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 0 15px rgba(214, 175, 55, 0.3);
         }
 
-        .btn-primary {
-            background: linear-gradient(90deg, #2563eb, #0284c7);
-            color: #fff;
-            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
-        }
-
-        .btn-primary:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #e2e8f0;
-        }
-
-        .btn-outline:hover {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .footer-note {
-            margin-top: 25px;
-            font-size: 0.8rem;
-            color: #64748b;
+        .music-icon {
+            fill: var(--gold);
+            width: 20px;
+            height: 20px;
         }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <div class="badge">Rasmiy Taklifnoma</div>
+<div class="phone-wrapper" id="phone-container">
     
-    <h1>AMALIY SEMINAR</h1>
-    <p class="subtitle">
-        Hurmatli Farg'ona viloyati tuman va shahar axborot-kutubxona markazlari rahbarlari hamda xodimlari!
-    </p>
+    <!-- 1-EKRAN -->
+    <div class="screen" id="welcome-screen">
+        <div class="corner-ornament top-left" style="top: 15px; left: 15px;"></div>
+        <div class="corner-ornament top-right" style="top: 15px; right: 15px;"></div>
+        <div class="corner-ornament bottom-left" style="bottom: 15px; left: 15px;"></div>
+        <div class="corner-ornament bottom-right" style="bottom: 15px; right: 15px;"></div>
 
-    <div class="divider"></div>
+        <div class="gold-sparkle">вњ¦ вњ¦ вњ¦</div>
+        <div class="subtitle-premium">Hurmatli</div>
+        <div class="guest-title">Mehmonimiz</div>
+        <div class="gold-sparkle" style="margin-bottom: 40px;">вњ¦</div>
 
-    <p style="font-size: 0.95rem; color: #cbd5e1; margin-bottom: 25px; line-height: 1.7;">
-        Sizni Furqat tumani axborot-kutubxona markazida soha faoliyatini takomillashtirish, tajriba almashish hamda zamonaviy kutubxona xizmatlarini rivojlantirishga bag'ishlangan <b>viloyat amaliy seminariga</b> taklif etamiz.
-    </p>
-
-    <div class="info-grid">
-        <div class="info-box">
-            <span>📅 Sana va Vaqt</span>
-            <p>14-Avgust, 2026-yil<br>Soat 09:30 da</p>
-        </div>
-        <div class="info-box">
-            <span>📍 Manzil</span>
-            <p>Furqat tumani Axborot-kutubxona markazi binosi</p>
-        </div>
-        <div class="info-box">
-            <span>👥 Ishtirokchilar</span>
-            <p>Viloyat tuman va shahar AKM rahbarlari va xodimlari</p>
-        </div>
-        <div class="info-box">
-            <span>📞 Murojaat uchun</span>
-            <p>+998 (90) 000-00-00</p>
-        </div>
+        <button class="btn-open" onclick="openInvitation()">Taklifnomani Ochish</button>
     </div>
 
-    <div class="timer-title">Seminar boshlanishiga qoldi:</div>
-    <div class="countdown">
-        <div class="time-block">
-            <span id="days">00</span>
-            <label>Kun</label>
-        </div>
-        <div class="time-block">
-            <span id="hours">00</span>
-            <label>Soat</label>
-        </div>
-        <div class="time-block">
-            <span id="minutes">00</span>
-            <label>Daqiqa</label>
-        </div>
-        <div class="time-block">
-            <span id="seconds">00</span>
-            <label>Soniya</label>
-        </div>
-    </div>
+    <!-- ASOSIY KONTENTLAR -->
+    <div class="main-content" id="main-content">
+        
+        <!-- 2-EKRAN: ASSALOMU ALAYKUM -->
+        <div class="screen" id="section-1">
+            <div class="welcome-title-top">Assalomu alaykum</div>
+            
+            <img src="photo01.jpg" alt="Furqat tumani axborot-kutubxona markazi" class="akm-illustration">
+            <img src="photo02.jpg" alt="Furqat tumani axborot-kutubxona markazi" class="akm-illustration">
+            
+            <div class="section-label">Sizni</div>
+            <div class="names-title">
+                Furqat tumani
+                <div class="and-divider"></div>
+                axborot-kutubxona markaziga
+            </div>
+            
+            <div class="invitation-sub-text">amaliy-semenar munosabati bilan<br>samimiy taklif etamiz</div>
+            
+            <div class="family-container" onclick="scrollToSection('section-2')">
+                <div class="family-tag">Furqat TAKM jamoasi</div>
+                <div class="family-arrow">в†“</div>
+            </div>
 
-    <div class="btn-group">
-        <a href="[https://maps.app.goo.gl/Posa7kBf5SbnKGVQ8" target="_blank" class="btn btn-primary">📍 Xaritadan joylashuvni ko'rish</a>
-        <a href="tel:+998900000000" class="btn btn-outline">📞 Tashkilotchi bilan bog'lanish</a>
-    </div>
+            <div class="scroll-down-indicator" onclick="scrollToSection('section-2')">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
 
-    <div class="footer-note">
-        Tashkilotchi: Furqat tumani axborot-kutubxona markazi
+        <div class="premium-divider"></div>
+
+        <!-- 3-EKRAN: TAKLIF MATNI VA TAYMER -->
+        <div class="screen" id="section-2" style="justify-content: start; min-height: auto;">
+            <div class="premium-invitation-box">
+                <p class="invitation-desc-premium">
+                    Siz, aziz hamkasblarni, tashkil etilayotgan” <b>"Kitobxon</b><b>rahbar"</b>amaliy-semenar munosabati bilan tumanimizga lutfan taklif etamiz.
+                </p>
+            </div>
+
+            <div class="premium-card-date">
+                <div class="subtitle-premium" style="margin-bottom: 0;">Semenar Sanasi</div>
+                <div class="date-large-premium">14-Avgust, 2026</div>
+                <div class="time-premium">Soat 08:00 dan boshlab</div>
+            </div>
+
+            <div class="countdown-container-premium">
+                <div class="subtitle-premium" style="margin-bottom: 5px;">Semenarga qoldi:</div>
+                <div class="countdown-row-premium">
+                    <div class="countdown-cell-premium">
+                        <span class="countdown-val-premium" id="days">00</span>
+                        <span class="countdown-lbl-premium">Kun</span>
+                    </div>
+                    <div class="countdown-cell-premium">
+                        <span class="countdown-val-premium" id="hours">00</span>
+                        <span class="countdown-lbl-premium">Soat</span>
+                    </div>
+                    <div class="countdown-cell-premium">
+                        <span class="countdown-val-premium" id="mins">00</span>
+                        <span class="countdown-lbl-premium">Min</span>
+                    </div>
+                    <div class="countdown-cell-premium">
+                        <span class="countdown-val-premium" id="secs">00</span>
+                        <span class="countdown-lbl-premium">Sek</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-down-indicator" style="bottom: 5px;" onclick="scrollToSection('section-3')">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <div class="premium-divider"></div>
+
+        <!-- 4-EKRAN: MANZIL -->
+        <div class="screen" id="section-3" style="justify-content: start; min-height: auto; padding-top: 110px; padding-bottom: 110px;">
+            <div class="corner-ornament top-left"></div>
+            <div class="corner-ornament top-right"></div>
+            <div class="corner-ornament bottom-left"></div>
+            <div class="corner-ornament bottom-right"></div>
+
+            <div class="subtitle-premium" style="margin-bottom: 0;">Tashrifingizni kutib qolamiz!</div>
+            <div class="gold-sparkle" style="margin-top: 10px; margin-bottom: 30px;">вњ¦ рџ“Ќ вњ¦</div>
+
+            <div class="address-card">
+                <div class="address-destination">Furqat TAKM jamoasi</div>
+                <p class="address-p">
+                    Farg'ona viloyati, Furqat tumani,<br>
+                    Chirkay MFY, Istiqlol ko'chasi.
+                </p>
+            </div>
+
+            <a href="https://maps.app.goo.gl/ibZXKzYGnFA2CLia9" target="_blank" class="action-button">Xaritadan koвЂrish</a>
+
+            <div class="qr-section">
+                <div class="subtitle-premium" style="margin-bottom: 15px; font-size: 0.75rem;">Tezkor Navigatsiya QR-Kodi</div>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://maps.app.goo.gl/ibZXKzYGnFA2CLia9" alt="QR Lokatsiya">
+            </div>
+
+            <div class="family-footer">
+                <div class="subtitle-premium" style="margin-bottom: 5px; margin-top: 25px; font-size: 0.8rem;">Murojaat uchun:</div>
+                <div class="phone-footer">
+                    <a href="tel:+98946067086">+98 (91) 132 19 85</a>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 
+<audio id="bg-music" loop>
+    <source src="https://assets.e-invitation.uz/musics/shahzoda_kuyov_va_kelinchak.mp3" type="audio/mpeg">
+</audio>
+
+<div class="music-toggle" onclick="toggleMusic()">
+    <svg class="music-icon" viewBox="0 0 24 24">
+        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+    </svg>
+</div>
+
 <script>
-    // Seminar sanasi: 14-Avgust, 2026 Soat 08:00
-    const eventDate = new Date("August 14, 2026 08:00:00").getTime();
-
-    const updateTimer = () => {
-        const now = new Date().getTime();
-        const difference = eventDate - now;
-
-        if (difference > 0) {
-            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-            document.getElementById("days").innerText = days < 10 ? "0" + days : days;
-            document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
-            document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
-            document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
-        } else {
-            document.querySelector(".countdown").innerHTML = "<p style='color:#38bdf8; font-weight:bold;'>Seminar boshlandi yoki yakunlandi!</p>";
+    function scrollToSection(sectionId) {
+        const target = document.getElementById(sectionId);
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-    };
+    }
+
+    function openInvitation() {
+        document.getElementById('welcome-screen').classList.add('hidden');
+        document.getElementById('main-content').classList.add('visible');
+        
+        const music = document.getElementById('bg-music');
+        
+        // Ovoz balandligini 30% ga tushirish (0.0 dan 1.0 gacha oraliqda)
+        music.volume = 0.2; 
+        
+        music.play().catch(function(error) {
+            console.log("Musiqa ijrosi bloklandi.");
+        });
+    }
+
+    function toggleMusic() {
+        const music = document.getElementById('bg-music');
+        if (music.paused) { music.play(); } else { music.pause(); }
+    }
+
+    const targetDate = new Date("August 14, 2026 08:00:00").getTime();
+
+    function updateTimer() {
+        const now = new Date().getTime();
+        const diff = targetDate - now;
+        if (diff < 0) return;
+
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById('days').innerText = d < 10 ? '0' + d : d;
+        document.getElementById('hours').innerText = h < 10 ? '0' + h : h;
+        document.getElementById('mins').innerText = m < 10 ? '0' + m : m;
+        document.getElementById('secs').innerText = s < 10 ? '0' + s : s;
+    }
 
     setInterval(updateTimer, 1000);
     updateTimer();
